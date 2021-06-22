@@ -14,7 +14,6 @@ class CreditCardWidget extends StatefulWidget {
     Key? key,
     required this.cardNumber,
     required this.expiryDate,
-    required this.cardHolderName,
     required this.cvvCode,
     required this.showBackView,
     this.animationDuration = const Duration(milliseconds: 500),
@@ -24,14 +23,12 @@ class CreditCardWidget extends StatefulWidget {
     this.cardBgColor = const Color(0xff1b447b),
     this.obscureCardNumber = true,
     this.obscureCardCvv = true,
-    this.labelCardHolder = 'CARD HOLDER',
     this.labelExpiredDate = 'MM/YY',
     this.cardType,
   }) : super(key: key);
 
   final String cardNumber;
   final String expiryDate;
-  final String cardHolderName;
   final String cvvCode;
   final TextStyle? textStyle;
   final Color cardBgColor;
@@ -42,7 +39,6 @@ class CreditCardWidget extends StatefulWidget {
   final bool obscureCardNumber;
   final bool obscureCardCvv;
 
-  final String labelCardHolder;
   final String labelExpiredDate;
 
   final CardType? cardType;
@@ -250,7 +246,7 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
 
   ///
   /// Builds a front container containing
-  /// Card number, Exp. year and Card holder name
+  /// Card number, Exp. year
   ///
   Container buildFrontContainer(
     double width,
@@ -316,19 +312,6 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
                 widget.expiryDate.isEmpty
                     ? widget.labelExpiredDate
                     : widget.expiryDate,
-                style: widget.textStyle ?? defaultTextStyle,
-              ),
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
-              child: Text(
-                widget.cardHolderName.isEmpty
-                    ? widget.labelCardHolder
-                    : widget.cardHolderName,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
                 style: widget.textStyle ?? defaultTextStyle,
               ),
             ),

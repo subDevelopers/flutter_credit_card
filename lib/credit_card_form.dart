@@ -17,9 +17,6 @@ class CreditCardForm extends StatefulWidget {
     required this.themeColor,
     this.textColor = Colors.black,
     this.cursorColor,
-    this.cardHolderDecoration = const InputDecoration(
-      labelText: 'Card holder',
-    ),
     this.cardNumberDecoration = const InputDecoration(
       labelText: 'Card number',
       hintText: 'XXXX XXXX XXXX XXXX',
@@ -53,7 +50,6 @@ class CreditCardForm extends StatefulWidget {
   final GlobalKey<FormState> formKey;
 
   final InputDecoration cardNumberDecoration;
-  final InputDecoration cardHolderDecoration;
   final InputDecoration expiryDateDecoration;
   final InputDecoration cvvCodeDecoration;
 
@@ -81,7 +77,6 @@ class _CreditCardFormState extends State<CreditCardForm> {
   FocusNode cvvFocusNode = FocusNode();
   FocusNode cardNumberNode = FocusNode();
   FocusNode expiryDateNode = FocusNode();
-  FocusNode cardHolderNode = FocusNode();
 
   void textFieldFocusDidChange() {
     creditCardModel.isCvvFocused = cvvFocusNode.hasFocus;
@@ -134,7 +129,6 @@ class _CreditCardFormState extends State<CreditCardForm> {
 
   @override
   void dispose() {
-    cardHolderNode.dispose();
     cvvFocusNode.dispose();
     expiryDateNode.dispose();
     super.dispose();
@@ -231,9 +225,6 @@ class _CreditCardFormState extends State<CreditCardForm> {
                       focusNode: cvvFocusNode,
                       controller: _cvvCodeController,
                       cursorColor: widget.cursorColor ?? themeColor,
-                      onEditingComplete: () {
-                        FocusScope.of(context).requestFocus(cardHolderNode);
-                      },
                       style: TextStyle(
                         color: widget.textColor,
                       ),

@@ -9,8 +9,6 @@ void main() {
     const String expiryDateHint = 'MM/JJ';
     const String cvvLabel = 'Kartenprüfnummer';
     const String cvvHint = 'XXX';
-    const String cardHolderLabel = 'Karteninhaber';
-    const String cardHolderHint = 'Max Mustermann';
 
     const LocalizedText localizedText = LocalizedText(
       cardNumberLabel: cardNumberLabel,
@@ -19,8 +17,6 @@ void main() {
       expiryDateHint: expiryDateHint,
       cvvLabel: cvvLabel,
       cvvHint: cvvHint,
-      cardHolderLabel: cardHolderLabel,
-      cardHolderHint: cardHolderHint,
     );
 
     expect(localizedText.cardNumberLabel, cardNumberLabel);
@@ -29,8 +25,6 @@ void main() {
     expect(localizedText.expiryDateHint, expiryDateHint);
     expect(localizedText.cvvLabel, cvvLabel);
     expect(localizedText.cvvHint, cvvHint);
-    expect(localizedText.cardHolderLabel, cardHolderLabel);
-    expect(localizedText.cardHolderHint, cardHolderHint);
   });
 
   test('Object correctly instantiated with defaults', () {
@@ -40,8 +34,6 @@ void main() {
     const String expiryDateHint = 'MM/YY';
     const String cvvLabel = 'CVV';
     const String cvvHint = 'XXXX';
-    const String cardHolderLabel = 'Card Holder';
-    const String cardHolderHint = '';
 
     const LocalizedText localizedText = LocalizedText();
 
@@ -51,7 +43,5 @@ void main() {
     expect(localizedText.expiryDateHint, expiryDateHint);
     expect(localizedText.cvvLabel, cvvLabel);
     expect(localizedText.cvvHint, cvvHint);
-    expect(localizedText.cardHolderLabel, cardHolderLabel);
-    expect(localizedText.cardHolderHint, cardHolderHint);
   });
 }
