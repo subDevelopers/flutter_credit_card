@@ -52,7 +52,6 @@ class MySampleState extends State<MySample> {
                         obscureNumber: true,
                         cardNumber: cardNumber,
                         cvvCode: cvvCode,
-                        cardHolderName: cardHolderName,
                         expiryDate: expiryDate,
                         themeColor: Colors.blue,
                         cardNumberDecoration: const InputDecoration(
@@ -118,7 +117,6 @@ class MySampleState extends State<MySample> {
     setState(() {
       cardNumber = creditCardModel!.cardNumber;
       expiryDate = creditCardModel.expiryDate;
-      cardHolderName = creditCardModel.cardHolderName;
       cvvCode = creditCardModel.cvvCode;
       isCvvFocused = creditCardModel.isCvvFocused;
     });
