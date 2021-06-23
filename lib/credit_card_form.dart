@@ -35,9 +35,10 @@ class CreditCardForm extends StatefulWidget {
       hintText: 'XX',
     ),
     required this.formKey,
-    this.cvvValidationMessage = 'Please input a valid CVV',
-    this.dateValidationMessage = 'Please input a valid date',
-    this.numberValidationMessage = 'Please input a valid number',
+    this.cvvValidationMessage = '잘못된 입력입니다.',
+    this.dateValidationMessage = '잘못된 입력입니다.',
+    this.numberValidationMessage = '카드번호 입력이 잘못되었습니다.',
+    this.cardPasswordValidationMessage = '',
   }) : super(key: key);
 
   final String cardNumber;
@@ -47,6 +48,7 @@ class CreditCardForm extends StatefulWidget {
   final String cvvValidationMessage;
   final String dateValidationMessage;
   final String numberValidationMessage;
+  final String cardPasswordValidationMessage;
   final void Function(CreditCardModel) onCreditCardModelChange;
   final Color themeColor;
   final Color textColor;
@@ -285,10 +287,17 @@ class _CreditCardFormState extends State<CreditCardForm> {
                       color: widget.textColor,
                     ),
                     decoration: widget.cardPasswordDecoration,
-                    keyboardType: TextInputType.text,
+                    keyboardType: TextInputType.number,
                     textInputAction: TextInputAction.done,
                     onEditingComplete: () {
                       onCreditCardModelChange(creditCardModel);
+                    },
+                    validator: (String? value) {
+                      // Validate less that 13 digits +3 white spaces
+                      if (value!.isEmpty || value.length < 2) {
+                        return widget.cardPasswordValidationMessage;
+                      }
+                      return null;
                     },
                   ),
                 ),
