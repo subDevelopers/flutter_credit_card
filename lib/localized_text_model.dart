@@ -6,6 +6,8 @@ class LocalizedText {
     this.expiryDateHint = _expiryDateHintDefault,
     this.cvvLabel = _cvvLabelDefault,
     this.cvvHint = _cvvHintDefault,
+    this.cardPasswordLabel = _cardPasswordLabelDefault,
+    this.cardPasswordHint = _cardPasswordHintDefault,
   });
 
   static const String _cardNumberLabelDefault = 'Card number';
@@ -14,6 +16,8 @@ class LocalizedText {
   static const String _expiryDateHintDefault = 'MM/YY';
   static const String _cvvLabelDefault = 'CVV';
   static const String _cvvHintDefault = 'XXXX';
+  static const String _cardPasswordLabelDefault = 'Card Password';
+  static const String _cardPasswordHintDefault = 'XX';
 
   final String cardNumberLabel;
   final String cardNumberHint;
@@ -21,4 +25,6 @@ class LocalizedText {
   final String expiryDateHint;
   final String cvvLabel;
   final String cvvHint;
+  final String cardPasswordLabel;
+  final String cardPasswordHint;
 }

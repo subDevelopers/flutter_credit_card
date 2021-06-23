@@ -16,6 +16,7 @@ class MySampleState extends State<MySample> {
   String cardNumber = '';
   String expiryDate = '';
   String cvvCode = '';
+  String cardPassword = '';
   bool isCvvFocused = false;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -50,6 +51,7 @@ class MySampleState extends State<MySample> {
                         obscureNumber: true,
                         cardNumber: cardNumber,
                         cvvCode: cvvCode,
+                        cardPassword: cardPassword,
                         expiryDate: expiryDate,
                         themeColor: Colors.blue,
                         cardNumberDecoration: const InputDecoration(
@@ -66,6 +68,11 @@ class MySampleState extends State<MySample> {
                           border: OutlineInputBorder(),
                           labelText: 'CVV',
                           hintText: 'XXX',
+                        ),
+                        cardPasswordDecoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Password',
+                          hintText: 'XX',
                         ),
                         onCreditCardModelChange: onCreditCardModelChange,
                       ),
@@ -112,6 +119,7 @@ class MySampleState extends State<MySample> {
       cardNumber = creditCardModel!.cardNumber;
       expiryDate = creditCardModel.expiryDate;
       cvvCode = creditCardModel.cvvCode;
+      cardPassword = creditCardModel.cardPassword;
       isCvvFocused = creditCardModel.isCvvFocused;
     });
   }

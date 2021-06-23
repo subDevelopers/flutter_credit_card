@@ -11,6 +11,7 @@ class CreditCardForm extends StatefulWidget {
     required this.cardNumber,
     required this.expiryDate,
     required this.cvvCode,
+    required this.cardPassword,
     this.obscureCvv = false,
     this.obscureNumber = false,
     required this.onCreditCardModelChange,
@@ -29,6 +30,10 @@ class CreditCardForm extends StatefulWidget {
       labelText: 'CVV',
       hintText: 'XXX',
     ),
+    this.cardPasswordDecoration = const InputDecoration(
+      labelText: 'Password',
+      hintText: 'XX',
+    ),
     required this.formKey,
     this.cvvValidationMessage = 'Please input a valid CVV',
     this.dateValidationMessage = 'Please input a valid date',
@@ -38,6 +43,7 @@ class CreditCardForm extends StatefulWidget {
   final String cardNumber;
   final String expiryDate;
   final String cvvCode;
+  final String cardPassword;
   final String cvvValidationMessage;
   final String dateValidationMessage;
   final String numberValidationMessage;
@@ -52,6 +58,7 @@ class CreditCardForm extends StatefulWidget {
   final InputDecoration cardNumberDecoration;
   final InputDecoration expiryDateDecoration;
   final InputDecoration cvvCodeDecoration;
+  final InputDecoration cardPasswordDecoration;
 
   @override
   _CreditCardFormState createState() => _CreditCardFormState();
@@ -61,6 +68,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
   late String cardNumber;
   late String expiryDate;
   late String cvvCode;
+  late String cardPassword;
   bool isCvvFocused = false;
   late Color themeColor;
 
@@ -73,10 +81,13 @@ class _CreditCardFormState extends State<CreditCardForm> {
       MaskedTextController(mask: '00/00');
   final TextEditingController _cvvCodeController =
       MaskedTextController(mask: '0000');
+  final TextEditingController _cardPasswordController =
+      MaskedTextController(mask: '00');
 
   FocusNode cvvFocusNode = FocusNode();
   FocusNode cardNumberNode = FocusNode();
   FocusNode expiryDateNode = FocusNode();
+  FocusNode cardPasswordNode = FocusNode();
 
   void textFieldFocusDidChange() {
     creditCardModel.isCvvFocused = cvvFocusNode.hasFocus;
@@ -87,9 +98,10 @@ class _CreditCardFormState extends State<CreditCardForm> {
     cardNumber = widget.cardNumber;
     expiryDate = widget.expiryDate;
     cvvCode = widget.cvvCode;
+    cardPassword = widget.cardPassword;
 
-    creditCardModel =
-        CreditCardModel(cardNumber, expiryDate, cvvCode, isCvvFocused);
+    creditCardModel = CreditCardModel(
+        cardNumber, expiryDate, cvvCode, cardPassword, isCvvFocused);
   }
 
   @override
@@ -125,12 +137,21 @@ class _CreditCardFormState extends State<CreditCardForm> {
         onCreditCardModelChange(creditCardModel);
       });
     });
+
+    _cardPasswordController.addListener(() {
+      setState(() {
+        cardPassword = _cardPasswordController.text;
+        creditCardModel.cardPassword = cardPassword;
+        onCreditCardModelChange(creditCardModel);
+      });
+    });
   }
 
   @override
   void dispose() {
     cvvFocusNode.dispose();
     expiryDateNode.dispose();
+    cardPasswordNode.dispose();
     super.dispose();
   }
 
@@ -225,6 +246,9 @@ class _CreditCardFormState extends State<CreditCardForm> {
                       focusNode: cvvFocusNode,
                       controller: _cvvCodeController,
                       cursorColor: widget.cursorColor ?? themeColor,
+                      onEditingComplete: () {
+                        FocusScope.of(context).requestFocus(cardPasswordNode);
+                      },
                       style: TextStyle(
                         color: widget.textColor,
                       ),
@@ -244,6 +268,42 @@ class _CreditCardFormState extends State<CreditCardForm> {
                       },
                     ),
                   ),
+                ),
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                Container(
+                  width: 85.0,
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  margin: const EdgeInsets.only(left: 16, top: 8, right: 16),
+                  child: TextFormField(
+                    controller: _cardPasswordController,
+                    cursorColor: widget.cursorColor ?? themeColor,
+                    focusNode: cardPasswordNode,
+                    style: TextStyle(
+                      color: widget.textColor,
+                    ),
+                    decoration: widget.cardPasswordDecoration,
+                    keyboardType: TextInputType.text,
+                    textInputAction: TextInputAction.done,
+                    onEditingComplete: () {
+                      onCreditCardModelChange(creditCardModel);
+                    },
+                  ),
+                ),
+                Row(
+                  children: <Widget>[
+                    Image.asset(
+                      'icons/ellipse.png',
+                      package: 'flutter_credit_card',
+                    ),
+                    const SizedBox(width: 5.0),
+                    Image.asset(
+                      'icons/ellipse.png',
+                      package: 'flutter_credit_card',
+                    ),
+                  ],
                 ),
               ],
             ),
