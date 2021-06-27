@@ -171,11 +171,19 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
         : widget.cvvCode;
 
     return Container(
+      margin: EdgeInsets.all(16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         gradient: backgroundGradientColor,
+        boxShadow: const <BoxShadow>[
+          BoxShadow(
+              color: Colors.grey,
+              blurRadius: 8.0,
+              spreadRadius: 2,
+              offset: Offset(3.0, 3.0)
+          ),
+        ],
       ),
-      margin: const EdgeInsets.all(16),
       width: widget.width ?? width,
       height: widget.height ??
           (orientation == Orientation.portrait ? height / 4 : height / 2),
@@ -269,14 +277,16 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
         : widget.cardNumber;
 
     return Container(
-      margin: const EdgeInsets.all(16),
+      margin: EdgeInsets.all(16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         gradient: backgroundGradientColor,
         boxShadow: const <BoxShadow>[
           BoxShadow(
             color: Colors.grey,
-            blurRadius: 5,
+            blurRadius: 8.0,
+            spreadRadius: 2,
+            offset: Offset(3.0, 3.0)
           ),
         ],
       ),
